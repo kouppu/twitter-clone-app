@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
+  has_many :tweet
+
   validates(:name, presence: true)
   validates(:nickname, presence: true)
 end
