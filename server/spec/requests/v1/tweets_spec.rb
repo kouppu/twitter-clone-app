@@ -39,8 +39,16 @@ RSpec.describe "V1::Tweets", type: :request do
       it '削除できる' do
         auth_tokens = sign_in(user)
         delete "/v1/tweets/#{tweet.id}", headers: auth_tokens
-        puts response.status
         expect(response).to have_http_status(200)
+      end
+    end
+
+    context '違うユーザーのツイートを削除しようとしたら' do
+      let(:other) { create(:user) }
+      it '削除できない' do
+        auth_tokens = sign_in(other)
+        delete "/v1/tweets/#{tweet.id}", headers: auth_tokens
+        expect(response).to have_http_status(404)
       end
     end
   end
