@@ -6,7 +6,7 @@ RSpec.describe "V1::Tweets", type: :request do
 
     context '未ログイン時' do
       it 'ツイートできない' do
-        post '/v1/tweets', params: { tweet: valid_params }
+        post '/v1/tweets', params: valid_params
         expect(response).to have_http_status(401)
       end
     end
@@ -15,7 +15,7 @@ RSpec.describe "V1::Tweets", type: :request do
       let(:user) { create(:user) }
       it 'ツイートできる' do
         auth_tokens = sign_in(user)
-        post '/v1/tweets', params: { tweet: valid_params }, headers: auth_tokens
+        post '/v1/tweets', params: valid_params, headers: auth_tokens
         res = JSON.parse(response.body)
         expect(res['status']).to eq('success')
         expect(res['data']['content']).to eq(valid_params[:content])
