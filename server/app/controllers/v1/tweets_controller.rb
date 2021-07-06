@@ -1,6 +1,11 @@
 class V1::TweetsController < ApplicationController
-  before_action :authenticate_v1_user!, only: %i[create destroy]
+  before_action :authenticate_v1_user!, only: %i[index create destroy]
   before_action :correct_user, only: :destroy
+
+  def index
+    tweets = Tweet.page(params[:page]).per(10)
+    render_success(tweets)
+  end
 
   def create
     @tweet = current_v1_user.tweets.build(tweet_params)
@@ -19,7 +24,7 @@ class V1::TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.permit(:content)
+    params.permit(:content, :page)
   end
 
   def correct_user

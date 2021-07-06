@@ -9,7 +9,7 @@ RSpec.describe Tweet, type: :model do
     end
   end
 
-  describe '#user_id' do
+  describe 'user_id' do
     context 'nilのとき' do
       let(:tweet) { build_stubbed(:tweet, user_id: nil) }
       it 'エラーになる' do
@@ -18,7 +18,7 @@ RSpec.describe Tweet, type: :model do
     end
   end
 
-  describe '#content' do
+  describe 'content' do
     let(:tweet) { build_stubbed(:tweet, content: content) }
     context 'nilなら' do
       let(:content) { nil }

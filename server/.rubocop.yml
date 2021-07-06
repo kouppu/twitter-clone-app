@@ -4,3 +4,7 @@ Metrics/BlockLength:
     - "spec/**/*"
 HashSyntax:
   EnforcedStyle: ruby19
+Style/AsciiComments:
+  Enabled: false
+ClassAndModuleChildren:
+  EnforcedStyle: compact

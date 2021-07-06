@@ -3,6 +3,9 @@ class ApplicationController < ActionController::API
 
   protected
 
+  # 正常レスポンス
+  #
+  # @param array
   def render_success(response_data = [])
     render json: {
       status: 'success',
@@ -10,6 +13,10 @@ class ApplicationController < ActionController::API
     }
   end
 
+  # 異常レスポンスを返す
+  #
+  # @param string ステータスコード
+  # @param string
   def render_error(status, message)
     response = {
       status: 'error',
